@@ -1,73 +1,112 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Bank API - Version 1
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+The Bank API is an ongoing project developed using TypeScript and NestJS. It aims to provide a robust and scalable API for banking operations, allowing users to manage their accounts, make transactions, and perform various financial activities.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Please note that this README is a work in progress and will be updated as the project progresses. It currently provides an overview of the project, its features, and instructions for installation and setup.
 
-## Description
+## Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- User authentication and authorization.
+- Account management (create, update, and delete accounts).
+- Transaction operations (deposit, withdrawal, transfer).
+- Transaction history and statements.
+- Account balance and transaction validation.
 
 ## Installation
 
-```bash
-$ yarn install
-```
+To run the Bank API locally, please follow the steps below:
 
-## Running the app
+1. Ensure you have [Node.js](https://nodejs.org) installed (version 18 or higher).
 
-```bash
-# development
-$ yarn run start
+2. Clone the repository:
 
-# watch mode
-$ yarn run start:dev
+   ```
+   git clone https://github.com/vinybergamo/bank-api.git
+   ```
 
-# production mode
-$ yarn run start:prod
-```
+3. Navigate to the project directory:
 
-## Test
+   ```
+   cd bank-api
+   ```
 
-```bash
-# unit tests
-$ yarn run test
+4. Install the dependencies:
 
-# e2e tests
-$ yarn run test:e2e
+   ```
+   yarn install
+   ```
 
-# test coverage
-$ yarn run test:cov
-```
+5. Set up the environment variables. Create a `.env` file in the project's root directory and provide the following variables:
 
-## Support
+   ```
+   PORT=3333
+   DATABASE_URL=<your-database-url>
+   JWT_SECRET=<your-jwt-secret>
+   ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+   Replace `<your-database-url>` with the URL of your PostgreSQL database, and `<your-jwt-secret>` with a secure secret for JSON Web Tokens.
 
-## Stay in touch
+6. Start the application:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+   ```
+   yarn start:dev
+   ```
+
+   The Bank API will now be running locally on port 3000 (or the specified port in the `.env` file).
+
+## API Endpoints
+
+The following endpoints are currently available in the Bank API (prefixed with `/api/v1`)
+
+- `POST /api/v1/auth/signup`: Register a new user.
+- `POST /api/v1/auth/login`: Authenticate a user and retrieve an access token.
+- `GET /api/v1/accounts`: Retrieve a list of accounts.
+- `GET /api/v1/accounts/:id`: Retrieve details of a specific account.
+- `POST /api/v1/accounts`: Create a new account.
+- `PATCH /api/v1/accounts/:id`: Update an existing account.
+- `DELETE /api/v1/accounts/:id`: Delete an account.
+- `POST /api/v1/transactions/deposit`: Deposit funds into an account.
+- `POST /api/v1/transactions/withdraw`: Withdraw funds from an account.
+- `POST /api/v1/transactions/transfer`: Transfer funds between accounts.
+- `GET /api/v1/transactions/:id`: Retrieve details of a specific transaction.
+- `GET /api/v1/transactions/history/:accountId`: Retrieve transaction history for a specific account.
+- `GET /api/v1/transactions/statements/:accountId`: Retrieve account statements for a specific account.
+
+Please note that this documentation is subject to change as the project evolves.
+
+## Examples
+
+Examples of how to use the Bank API will be provided in future updates of this README.
+
+## Contributing
+
+Contributions to the Bank API are welcome! If you'd like to contribute, please follow these guidelines:
+
+1. Fork the repository.
+
+2. Create a new branch for your feature or bug fix:
+
+   ```
+   git checkout -b my-feature
+   ```
+
+3. Make your changes and ensure the code follows the project's coding style.
+
+4. Commit your changes and push the branch to your forked repository:
+
+   ```
+   git commit -m "feat: Add new feature"
+   git push origin my-feature
+   ```
+
+5. Open a pull request against the main repository, describing your changes and their purpose.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+The Bank API is released under the [MIT License](LICENSE).
+
+## Contact
+
+If you have any questions or need further assistance, please contact the project maintainer at [contato@vinybergamo.com](mailto:contato@vinybergamo.com)
+
+Thank you for using the
