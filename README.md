@@ -12,7 +12,87 @@ Please note that this README is a work in progress and will be updated as the pr
 - Transaction history and statements.
 - Account balance and transaction validation.
 
-## Installation
+## Run with Docker Compose
+Get the backend API up and running with docker compose.
+
+
+Ensure you have [Docker](https://docs.docker.com/engine/install/), [Docker Compose](https://docs.docker.com/compose/install/) or [Docker Desktop](https://docs.docker.com/desktop/) (in case of Windows) 
+
+1. Run the application with Docker Compose
+```
+docker-compose up -d
+```
+
+2. Call the API users endpoint 
+```
+curl --location 'http://localhost:3333/api/v1/users'
+```
+
+Docker compose will handle and set the environment so you will be able to use the backend API right away.
+
+That's it!
+
+### Stack
+This application uses the following technologies
+- NodeJS
+- NestJS
+- TypeScript
+- PostgreSQL 
+
+### Volumes
+Make sure to handle the data from the Postgres container by editing ``docker-compose.yml`` so you don't miss your data when container is down.  
+
+Uncomment the ``volumes`` section and set a folder on ``volumes.db-data.driver_opts.device``
+
+#### Examples:
+
+**Linux** 
+
+``/home/your_username/folder_name``
+
+```
+volumes:
+  db-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/home/your_username/folder_name'                                             
+```
+
+
+**Windows** 
+
+``C:\\users\\your_username\\folder_name``
+```
+volumes:
+  db-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: 'C:\\users\\your_username\\folder_name'                                            
+```
+
+Uncomment the ``volumes`` session from the ``db`` service. Don't change anything in this section.
+
+```
+db:
+    image: postgres:16-alpine
+    container_name: bank_postgres_srv
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ****
+      POSTGRES_PASSWORD: ***
+      POSTGRES_DB: ***
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+```
+
+
+## Manual Installation
 
 To run the Bank API locally, please follow the steps below:
 
