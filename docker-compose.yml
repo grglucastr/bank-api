@@ -1,0 +1,35 @@
+services:
+  backend-api:
+    build: .
+    image: "vinybergamo/bank-api"
+    container_name: bank_backend_api
+    ports:
+      - "3333:3333"
+    environment:
+      DATABASE_URL: "postgres://bankapi:bankapi@db/bankapi?sslmode=disable"
+    depends_on:
+      - db
+  db:
+    image: postgres:16-alpine
+    container_name: bank_postgres_srv
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: bankapi
+      POSTGRES_PASSWORD: bankapi
+      POSTGRES_DB: bankapi
+#    volumes:
+#      - "db-data:/var/lib/postgresql/data"
+
+#volumes:
+#  db-data:
+#    driver: local
+#    driver_opts:
+#      type: 'none'
+#      o: 'bind'
+#      device: '' # <-- Create a folder for you database data, then reference it here
+#                 #     Ex (Windows).: C:\\users\\your_username\\folder_name
+#                 #     Ex (Linux).: /home/your_username/folder_name
+#                                                      
+
